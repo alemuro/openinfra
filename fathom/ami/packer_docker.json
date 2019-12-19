@@ -1,0 +1,20 @@
+{
+    "builders": [{
+        "type": "docker",
+        "image": "ubuntu",
+        "commit": true
+    }],
+    "provisioners": [{
+            "type": "shell",
+            "inline": [
+                "apt-get update && apt-get -qy install curl wget sudo"
+            ]
+        },
+        {
+            "type": "salt-masterless",
+            "local_state_tree": "salt",
+            "skip_bootstrap": false,
+            "disable_sudo": false
+        }
+    ]
+}
